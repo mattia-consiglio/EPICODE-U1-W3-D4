@@ -1,0 +1,107 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Lilita One", sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+#master-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+#master-container #master {
+  border: 2px solid #000;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+#master-container #master #master-number {
+  width: 20%;
+  padding-right: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+#master-container #master #master-number #etractedNumber {
+  width: 80px;
+  height: 80px;
+  background-color: #75c2f6;
+  border: 2px solid #1d5d9b;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #1d5d9b;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+#master-container #master #master-number button {
+  padding: 1rem;
+  font-size: 1.3rem;
+  border: 2px solid #1d5d9b;
+  background: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+}
+#master-container #master #master-number button:hover {
+  background: #75c2f6;
+}
+#master-container #master .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #000;
+}
+#master-container #master .row:last-child {
+  border-bottom: none;
+}
+#master-container #master .row .cell {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  text-align: center;
+  border-right: 1px solid #000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+#master-container #master .row .cell:last-child {
+  border-right: none;
+}
+#master-container #master .row .cell.selected .cell-text {
+  background: #f4d160;
+  padding: 1rem;
+  border-radius: 50%;
+}/*# sourceMappingURL=style.css.map */
