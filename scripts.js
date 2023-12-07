@@ -137,7 +137,7 @@ autoExtracBtn.addEventListener('click', () => {
 	} else {
 		intervalID = setInterval(() => {
 			extractNumber()
-		}, 200)
+		}, 1000)
 		autoExtracBtn.innerText = 'Ferma estrazione'
 	}
 })
