@@ -2,7 +2,9 @@ const selectedNumbers = []
 const masterBoard = document.getElementById('master-board')
 const extractedNumberHtml = document.getElementById('etractedNumber')
 const playerBaords = document.getElementById('players')
+const autoExtracBtn = document.getElementById('autoEtractNumber')
 let players = 0
+let intervalID = null
 
 const createBaorard = ({ rows = 0, cols = 0, matrix = [], parent = null }) => {
 	for (let i = 0; i < rows; i++) {
@@ -17,7 +19,8 @@ const createBaorard = ({ rows = 0, cols = 0, matrix = [], parent = null }) => {
 				cell.setAttribute('data-cell', i * 10 + j + 1)
 				cellText.innerText = `${i * 10 + j + 1}`
 			} else {
-				cell.setAttribute('data-cell', matrix[i][j])
+				const dataCell = matrix[i][j] === '' ? 'empty' : matrix[i][j]
+				cell.setAttribute('data-cell', dataCell)
 				cellText.innerText = matrix[i][j]
 			}
 			cell.appendChild(cellText)
@@ -29,20 +32,51 @@ const createBaorard = ({ rows = 0, cols = 0, matrix = [], parent = null }) => {
 
 const generateRandomNumber = ({ doNotRepeat = [], min = 0, max = 0 }) => {
 	let randomNumber = null
-	while (randomNumber === null || doNotRepeat.includes(randomNumber)) {
-		randomNumber = Math.floor(Math.random() * (max - min) + min)
+	doNotRepeat.sort((a, b) => a - b)
+	console.log(doNotRepeat)
+	if (doNotRepeat.length === max - 1) {
+		const numbers = Array.from({ length: 90 }, (_, i) => i + 1)
+		const missingNumber = numbers.filter(number => {
+			return !doNotRepeat.includes(number)
+		})[0]
+		randomNumber = missingNumber
+		return randomNumber
+	}
+	while (randomNumber === null || doNotRepeat.includes(randomNumber) || randomNumber > max) {
+		randomNumber = Math.floor(Math.random() * (max + max / 4 - min) + min)
+		console.log(randomNumber)
 	}
 	return randomNumber
 }
 
 const extractNumber = () => {
+	// console.log(selectedNumbers)
+
+	if (selectedNumbers.length >= 90) {
+		console.log(selectedNumbers.length)
+
+		if (intervalID) {
+			clearInterval(intervalID)
+			autoExtracBtn.innerText = 'Inizia estrazione'
+		}
+		return
+	}
 	const randomNumber = generateRandomNumber({ doNotRepeat: selectedNumbers, min: 1, max: 90 })
 	selectedNumbers.push(randomNumber)
 	extractedNumberHtml.innerText = randomNumber
 	document
 		.querySelectorAll(`.cell[data-cell="${randomNumber}"]`)
 		.forEach(cell => cell.classList.add('selected'))
+
 	return randomNumber
+}
+
+const updatePlayesBoard = () => {
+	selectedNumbers.forEach(selected => {
+		document
+			.querySelectorAll(`.cell[data-cell="${selected}"]`)
+			.forEach(cell => cell.classList.add('selected'))
+	})
 }
 
 const createPlayerBoard = () => {
@@ -79,6 +113,7 @@ const createPlayerBoard = () => {
 	playerContainer.appendChild(playerBoard)
 
 	playerBaords.appendChild(playerContainer)
+	updatePlayesBoard()
 	players++
 }
 
@@ -92,6 +127,36 @@ document.getElementById('etractNumber').addEventListener('click', () => {
 
 document.getElementById('addPlayer').addEventListener('click', () => {
 	createPlayerBoard()
+})
+
+autoExtracBtn.addEventListener('click', () => {
+	if (intervalID) {
+		clearInterval(intervalID)
+		intervalID = null
+		autoExtracBtn.innerText = 'Inizia estrazione'
+	} else {
+		intervalID = setInterval(() => {
+			extractNumber()
+		}, 200)
+		autoExtracBtn.innerText = 'Ferma estrazione'
+	}
+})
+
+document.getElementById('reset').addEventListener('click', () => {
+	if (intervalID) {
+		clearInterval(intervalID)
+		intervalID = null
+		autoExtracBtn.innerText = 'Inizia estrazione'
+	}
+	selectedNumbers.forEach(selected => {
+		document
+			.querySelectorAll(`.cell[data-cell="${selected}"]`)
+			.forEach(cell => cell.classList.remove('selected'))
+	})
+	selectedNumbers.length = 0
+	extractedNumberHtml.innerText = '-'
+	players = 0
+	playerBaords.innerHTML = ''
 })
 
 createMasterBoard()

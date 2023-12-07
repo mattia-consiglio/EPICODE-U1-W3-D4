@@ -43,7 +43,7 @@ h1 {
 #master-container #master #master-number #etractedNumber {
   width: 80px;
   height: 80px;
-  background-color: #75c2f6;
+  background-color: #f4d160;
   border: 2px solid #1d5d9b;
   border-radius: 50%;
   display: -webkit-box;
@@ -138,4 +138,9 @@ h1 {
 }
 #players h2 {
   text-align: center;
+}
+#players div[data-cell=empty] span {
+  width: 70px;
+  height: 70px;
+  background-color: #000;
 }/*# sourceMappingURL=style.css.map */
