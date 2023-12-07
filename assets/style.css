@@ -68,20 +68,22 @@ h1 {
   cursor: pointer;
   -webkit-transition: 200ms;
   transition: 200ms;
+  margin-bottom: 1rem;
 }
 #master-container #master #master-number button:hover {
   background: #75c2f6;
 }
-#master-container #master .row {
+
+.row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   border-bottom: 1px solid #000;
 }
-#master-container #master .row:last-child {
+.row:last-child {
   border-bottom: none;
 }
-#master-container #master .row .cell {
+.row .cell {
   width: 80px;
   height: 80px;
   display: inline-block;
@@ -97,11 +99,43 @@ h1 {
       -ms-flex-pack: center;
           justify-content: center;
 }
-#master-container #master .row .cell:last-child {
+.row .cell:last-child {
   border-right: none;
 }
-#master-container #master .row .cell.selected .cell-text {
+.row .cell.selected .cell-text {
   background: #f4d160;
-  padding: 1rem;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.player-board {
+  margin: 1rem 0;
+  max-width: 720px;
+  border: 1px solid #000;
+}
+
+#players {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+#players h2 {
+  text-align: center;
 }/*# sourceMappingURL=style.css.map */

@@ -46,38 +46,60 @@ h1 {
 				border-radius: 0.5rem;
 				cursor: pointer;
 				transition: 200ms;
+				margin-bottom: 1rem;
 
 				&:hover {
 					background: #75c2f6;
 				}
 			}
 		}
+	}
+}
 
-		.row {
-			display: flex;
-			border-bottom: 1px solid #000;
-			&:last-child {
-				border-bottom: none;
-			}
-			.cell {
-				width: 80px;
-				height: 80px;
-				display: inline-block;
-				text-align: center;
-				border-right: 1px solid #000;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				&:last-child {
-					border-right: none;
-				}
-
-				&.selected .cell-text {
-					background: #f4d160;
-					padding: 1rem;
-					border-radius: 50%;
-				}
-			}
+.row {
+	display: flex;
+	border-bottom: 1px solid #000;
+	&:last-child {
+		border-bottom: none;
+	}
+	.cell {
+		width: 80px;
+		height: 80px;
+		display: inline-block;
+		text-align: center;
+		border-right: 1px solid #000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		&:last-child {
+			border-right: none;
 		}
+
+		&.selected .cell-text {
+			background: #f4d160;
+			width: 50px;
+			height: 50px;
+			// padding: 1rem;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}
+
+.player-board {
+	margin: 1rem 0;
+	max-width: 720px;
+	border: 1px solid #000;
+}
+
+#players {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	h2 {
+		text-align: center;
 	}
 }
