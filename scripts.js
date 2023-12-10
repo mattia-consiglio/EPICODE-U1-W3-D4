@@ -100,10 +100,11 @@ const createPlayerBoard = () => {
 		genarateBaseRanges()
 	}
 	const matrix = []
-	const col1Limit = players === 5 ? 0 : 2
-	const col1Min = players === 5 ? 0 : players === 4 ? 1 : 2
+	// const col1Limit = players === 5 ? 0 : 2
+	const col1Limit = Math.floor(Math.random() * 3)
+	const col1Min = 1
 	let col1Count = 0
-	const col9Limit = players === 5 ? 1 : 2
+	const col9Limit = Math.floor(Math.random() * 4)
 	const col9Min = players === 5 ? 1 : 2
 
 	let col9Count = 0
@@ -117,8 +118,6 @@ const createPlayerBoard = () => {
 		for (let j = 0; j < 9; j++) {
 			//add empty spaces
 			if (rowMaxEmptySpaces > 0) {
-				console.log('players', players, players % 5)
-
 				if (j === 0) {
 					if (playersCol1Numbers.length === 0 || (col1Count >= col1Limit && col1MaxSpaces > 0)) {
 						matrix[i].push('')
@@ -126,13 +125,10 @@ const createPlayerBoard = () => {
 						rowMaxEmptySpaces--
 						continue
 					} else {
-						if (
-							(!(players % 5 === 0) || players % 6 === 0) &&
-							col1MaxSpaces > 0 &&
-							col1Count > col1Min
-						) {
-							const addEmptyCell = generateRandomNumber([0, 1])
-							if (addEmptyCell === 1) {
+						if (col1MaxSpaces > 0 && col1Count > col1Min) {
+							const addEmptyCell = Math.random() < 0.5
+
+							if (addEmptyCell) {
 								matrix[i].push('')
 								col1MaxSpaces--
 								rowMaxEmptySpaces--
@@ -148,14 +144,10 @@ const createPlayerBoard = () => {
 						rowMaxEmptySpaces--
 						continue
 					} else {
-						if (
-							(!(players % 5 === 0) || players % 6 === 0) &&
-							playersCol9Numbers.length > 0 &&
-							col2to8MaxSpaces > 0 &&
-							col9Count > col9Min
-						) {
-							const addEmptyCell = generateRandomNumber([0, 1, 1])
-							if (addEmptyCell === 1) {
+						if (playersCol9Numbers.length > 0 && col2to8MaxSpaces > 0) {
+							const addEmptyCell = Math.random() < 0.4
+
+							if (addEmptyCell) {
 								matrix[i].push('')
 								col2to8MaxSpaces--
 								rowMaxEmptySpaces--
@@ -171,7 +163,7 @@ const createPlayerBoard = () => {
 						rowMaxEmptySpaces--
 						continue
 					} else {
-						if ((!(players % 5 === 0) || players % 6 === 0) && col9MaxSpaces > 0) {
+						if (col9MaxSpaces > 0 && col9Count > col9Limit) {
 							const addEmptyCell = Math.random() < 0.4
 							if (addEmptyCell) {
 								matrix[i].push('')
@@ -188,36 +180,36 @@ const createPlayerBoard = () => {
 			let randomNumber
 			if (j === 0) {
 				randomIndex = generateRandomNumber(playersCol1Numbers)
-				console.log(
-					'number extracted col 1',
-					randomIndex,
-					playersCol1Numbers,
-					playersCol1Numbers[randomIndex]
-				)
+				// console.log(
+				// 	'number extracted col 1',
+				// 	randomIndex,
+				// 	playersCol1Numbers,
+				// 	playersCol1Numbers[randomIndex]
+				// )
 				randomNumber = playersCol1Numbers[randomIndex]
 				playersCol1Numbers.splice(randomIndex, 1)
 				col1Count++
 			}
 			if (j >= 1 && j <= 7) {
 				randomIndex = generateRandomNumber(playersCol2to8Numbers)
-				console.log(
-					'number extracted col 2-8',
-					randomIndex,
-					playersCol2to8Numbers,
-					playersCol2to8Numbers[randomIndex]
-				)
+				// console.log(
+				// 	'number extracted col 2-8',
+				// 	randomIndex,
+				// 	playersCol2to8Numbers,
+				// 	playersCol2to8Numbers[randomIndex]
+				// )
 
 				randomNumber = playersCol2to8Numbers[randomIndex]
 				playersCol2to8Numbers.splice(randomIndex, 1)
 			}
 			if (j === 8) {
 				randomIndex = generateRandomNumber(playersCol9Numbers)
-				console.log(
-					'number extracted col 9',
-					randomIndex,
-					playersCol9Numbers,
-					playersCol9Numbers[randomIndex]
-				)
+				// console.log(
+				// 	'number extracted col 9',
+				// 	randomIndex,
+				// 	playersCol9Numbers,
+				// 	playersCol9Numbers[randomIndex]
+				// )
 				randomNumber = playersCol9Numbers[randomIndex]
 				playersCol9Numbers.splice(randomIndex, 1)
 				col9Count++
@@ -225,9 +217,9 @@ const createPlayerBoard = () => {
 
 			matrix[i].push(randomNumber)
 
-			console.log('remaining numbers col1', playersCol1Numbers)
-			console.log('remaining numbers col2-8', playersCol2to8Numbers)
-			console.log('remaining numbers col9', playersCol9Numbers)
+			// console.log('remaining numbers col1', playersCol1Numbers)
+			// console.log('remaining numbers col2-8', playersCol2to8Numbers)
+			// console.log('remaining numbers col9', playersCol9Numbers)
 		}
 
 		if (rowMaxEmptySpaces !== 0) {
@@ -250,7 +242,7 @@ const createPlayerBoard = () => {
 
 	const playerBoard = document.createElement('div')
 	const playerBoardTitle = document.createElement('h2')
-	console.log('playerGroups', playerGroups)
+	// console.log('playerGroups', playerGroups)
 	playerBoardTitle.innerText = `Cartella  ${players + 1 + playerGroups * 6}`
 	playerBoard.classList.add('player-board')
 	playerBoard.setAttribute('data-player', players)
@@ -275,9 +267,9 @@ document.getElementById('etractNumber').addEventListener('click', () => {
 })
 
 document.getElementById('addPlayer').addEventListener('click', () => {
-	// for (let i = 0; i < 6; i++) {
-	createPlayerBoard()
-	// }
+	for (let i = 0; i < 6; i++) {
+		createPlayerBoard()
+	}
 })
 
 autoExtracBtn.addEventListener('click', () => {
@@ -311,6 +303,7 @@ document.getElementById('reset').addEventListener('click', () => {
 	players = 0
 	playerBaords.innerHTML = ''
 	extractableNumbers.push(...allNumbers)
+	playerGroups = 0
 	genarateBaseRanges()
 })
 
