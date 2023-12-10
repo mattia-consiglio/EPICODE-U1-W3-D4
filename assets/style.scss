@@ -96,16 +96,24 @@ h1 {
 
 #players {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 2rem;
 
 	h2 {
 		text-align: center;
 	}
 
 	div[data-cell='empty'] span {
-		width: 70px;
-		height: 70px;
+		width: 50px;
+		height: 50px;
 		background-color: #000;
+	}
+
+	.row {
+		.cell {
+			width: 60px;
+			height: 60px;
+		}
 	}
 }
